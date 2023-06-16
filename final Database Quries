@@ -1,0 +1,131 @@
+drop database hackathon_pratice;
+
+
+create database hackathon_pratice;
+use hackathon_pratice;
+
+*****************************************************************************************
+create table users_tbl
+(
+user_id int auto_increment primary key,
+first_name varchar (50),
+last_name varchar (50),
+email varchar (50) unique,
+password varchar (50) not null
+);
+
+*****************************************************************************************
+*****************************************************************************************
+ create table roles_tbl
+ (
+ role_id int auto_increment primary key, 
+ role_name varchar(50)
+ );
+
+*****************************************************************************************
+*****************************************************************************************
+
+
+
+
+*****************************************************************************************
+user_roles
+
+
+CREATE TABLE users_roles (
+      user_id INT NOT NULL,
+      role_id INT NOT NULL,
+      FOREIGN KEY (user_id) REFERENCES users_tbl(user_id) ON UPDATE CASCADE,
+      FOREIGN KEY (role_id) REFERENCES roles_tbl(role_id) ON UPDATE CASCADE,
+    PRIMARY KEY (user_id, role_id)
+     );
+*****************************************************************************************
+*****************************************************************************************
+ addr_tbl
+ 
+  CREATE TABLE addr_tbl (
+     user_id INT NOT NULL,
+    address VARCHAR(50) NOT NULL,
+   city VARCHAR(50) NOT NULL,
+   pincode VARCHAR(50) NOT NULL,
+     state VARCHAR(50) NOT NULL,
+    
+   
+      PRIMARY KEY (user_id),
+      FOREIGN KEY (user_id) REFERENCES users_tbl(user_id) ON UPDATE CASCADE
+    );
+*****************************************************************************************
+*****************************************************************************************
+topics_tbl
+
+CREATE TABLE topics_tbl 
+(
+   topic_id INT NOT NULL AUTO_INCREMENT,   
+   topic_name VARCHAR(50) NOT NULL, 
+   desc_tp VARCHAR(255) NOT NULL,
+   PRIMARY KEY (topic_id) );
+ *****************************************************************************************
+****************************************************************************************
+ tutorials_tbl
+ 
+ 
+   CREATE TABLE tutorials_tbl 
+   (
+   
+   tutorials_id INT NOT NULL AUTO_INCREMENT,
+   title VARCHAR(100) NOT NULL,
+    visits INT,
+     publishDate DATE NOT NULL,
+    contents VARCHAR(255) NOT NULL,
+     author_id INT NOT NULL,
+     topic_id INT NOT NULL,
+   
+  
+  PRIMARY KEY (tutorials_id),
+   FOREIGN KEY (author_id) REFERENCES users_tbl(user_id) ON UPDATE CASCADE,
+    FOREIGN KEY (topic_id) REFERENCES topics_tbl(topic_id) ON UPDATE CASCADE
+    );
+*****************************************************************************************
+*****************************************************************************************
+comments_tbl
+
+create table comments_tbl
+(
+comment_id int auto_increment, 
+comment varchar(255), 
+tutorials_id int, user_id int, 
+PRIMARY KEY (comment_id),   
+FOREIGN KEY (tutorials_id) REFERENCES tutorials_tbl(tutorials_id) ON UPDATE CASCADE,   
+FOREIGN KEY (user_id) REFERENCES users_tbl(user_id) ON UPDATE CASCADE 
+);    
+
+
+*****************************************************************************************
+*****************************************************************************************
+*****************************************************************************************
+*****************************************************************************************
+*****************************************************************************************
+*****************************************************************************************
+
+===> Login 
+
+1.get request on login table
+>select * from users_tbl;
+
+
+2. var statement = `insert into user_id( first_name,last_name, email, password )
+    values ('${req.body.first_name}','${req.body.last_name}',
+            '${req.body.email}','${req.body.password}')`
+	
+--------------------------------------------------------------	
+	var statement = 
+    `insert into t_logins (firstName,lastName,email,mobileNo,address,password)
+    values ('${req.body.firstName}','${req.body.lastName}',
+            '${req.body.email}','${req.body.mobileNo}',
+            '${req.body.address}','${req.body.password}')`
+--------------------------------------------------------------
+
+
+
+       
+

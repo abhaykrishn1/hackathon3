@@ -1,0 +1,28 @@
+If you see a dollar sign being used in an Express application, 
+it is likely being used as a variable name or as part of a 
+JavaScript expression, 
+
+const [insertLogin,setlogin] = 
+    //these name should match with database column name
+    useState({firstName :"",  lastName :"",
+              email     :"",  mobileNo :"",
+              address   :"",  password  :""});
+
+var onTextChanged=(args)=>{
+    var copyOfInsertLogin = {...insertLogin};
+
+    // should be copyOfInsertLogin[firstName] = d;
+    copyOfInsertLogin[args.target.name]=args.target.value;
+    // hence name of text box should match with name of store object variable
+
+    setlogin(copyOfInsertLogin);
+    // insertLogin[firstName] = copyOfInsertLogin[firstName]
+    debugger;
+}
+
+
+<input type  ='text'
+               value={insertLogin.firstName}  //If i type 'd'
+               name = "firstName"
+               onChange = {onTextChanged}
+            />

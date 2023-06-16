@@ -1,0 +1,9 @@
+{
+    "PORT": 5000,
+    "dbSettings": {
+                    "host":"localhost",
+                    "user":"root",
+                    "password": "manager",
+                    "database":"hackathon_pratice"
+                   }
+}
